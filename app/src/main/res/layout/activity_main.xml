@@ -14,4 +14,8 @@
         android:text="Button"
         tools:layout_editor_absoluteX="138dp"
         tools:layout_editor_absoluteY="254dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="희수야사랑해"/>
 </android.support.constraint.ConstraintLayout>
