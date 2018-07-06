@@ -12,9 +12,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         main_start.setOnClickListener {
-            val intent = Intent(applicationContext, MapActivity::class.java)
+            val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
+        /*
         main_archive.setOnClickListener {
             val intent = Intent(applicationContext, StorageActivity::class.java)
             startActivity(intent)
@@ -23,5 +24,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, MapActivity::class.java)
             startActivity(intent)
         }
+        */
     }
 }
