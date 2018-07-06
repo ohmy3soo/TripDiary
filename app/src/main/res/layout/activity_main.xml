@@ -6,16 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="254dp" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="희수야사랑해"/>
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="44dp" />
+  
 </android.support.constraint.ConstraintLayout>
