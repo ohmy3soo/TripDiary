@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/noteimage1">
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/layout1">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Item"
+            android:gravity="center_vertical"
+            android:textColor="#f000"/>
+
+        <EditText
+            android:id="@+id/item"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/layout1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_toEndOf="@+id/update" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="60dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/layout2">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Price"
+            android:gravity="center_vertical"
+            android:textColor="#f000"/>
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/people"
+            android:layout_below="@+id/layout2"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="60dp"
+        android:layout_below="@+id/layout3">
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/layout3"
+            android:layout_toStartOf="@+id/price"
+            android:text="Date"
+            android:gravity="center_vertical"
+            android:textColor="#f000"/>
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_alignEnd="@+id/insert"
+            android:layout_below="@+id/layout3"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@+id/layout3"
+        android:gravity="center"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#ffff"
+            android:text="Add"
+            android:layout_below="@+id/layout5"
+            android:layout_toEndOf="@+id/layout3"
+            android:textColor="#f000"/>
+
+        <Button
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#ffff"
+            android:text="Search"
+            android:layout_below="@+id/layout6"
+            android:layout_toStartOf="@+id/delete"
+            android:layout_marginEnd="12dp"
+            android:textColor="#f000"/>
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout5"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/insert"
+            android:background="#ffff"
+            android:text="Delete"
+            android:layout_weight="3.55"
+            android:textColor="#f000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout5">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="avg: "
+            android:gravity="center_vertical"
+            android:textColor="#f000"/>
+
+        <TextView
+            android:id="@+id/avg"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:textColor="#f000" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/layout8"
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout6"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="60dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#f000"/>
+    </ScrollView>
+
+</LinearLayout>
