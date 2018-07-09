@@ -34,11 +34,10 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
+import java.io.*
 import java.util.*
 import java.text.SimpleDateFormat
+import java.util.jar.Manifest
 
 class MapActivity : AppCompatActivity() {
     var mapFragment: SupportMapFragment? = null
@@ -53,14 +52,14 @@ class MapActivity : AppCompatActivity() {
     private var running: Boolean = false
     var route = ""
     var name: String? = null
+    var polylineOptions: PolylineOptions? = null
+
     //Bitmap bm;
     var comment = ""
     var fileName = ""
     var titleName = ""
     var latitudeMarker: Double = 0.toDouble()
     var longitudeMarker: Double = 0.toDouble()
-
-    var polylineOptions: PolylineOptions? = null
 
     //사진
     var manager: LocationManager? = null
@@ -119,22 +118,23 @@ class MapActivity : AppCompatActivity() {
             FAM.close(true)
         }
         startBtn.setOnClickListener {
+
             running = true
             polylineOptions = PolylineOptions()
             polylineOptions?.color(Color.RED)
             polylineOptions?.width(15f)
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
         pauseBtn.setOnClickListener {
             running = false
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
         endBtn.setOnClickListener {
             running = false
             manager?.removeUpdates(myLocationListener)
-            saveRoute()
+            //saveRoute()
             route = ""
             //updateDataFile()
             map?.clear()
@@ -145,7 +145,14 @@ class MapActivity : AppCompatActivity() {
         mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment?.getMapAsync(OnMapReadyCallback { googleMap ->
             map = googleMap
-            map?.isMyLocationEnabled = true
+
+            val permission = ContextCompat.checkSelfPermission(this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                map?.isMyLocationEnabled = true
+            }
+
+
             //requestMyLocation()
         })
 
@@ -276,11 +283,11 @@ class MapActivity : AppCompatActivity() {
         val criteria = Criteria()
         criteria.accuracy = Criteria.ACCURACY_FINE
         val bestProvider = manager?.getBestProvider(criteria, true)
-
         myLocationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
                 latitudeMarker = location.getLatitude()
                 longitudeMarker = location.getLongitude()
+
                 showCurrentLocation(location)
             }
 
@@ -342,6 +349,7 @@ class MapActivity : AppCompatActivity() {
             mSensorManager!!.unregisterListener(mListener)
         }
     }
+
     override fun onResume() {
         super.onResume()
 
@@ -353,22 +361,110 @@ class MapActivity : AppCompatActivity() {
             }
         }
 
-        if(mCompassEnabled) {
-            mSensorManager?.registerListener(mListener, mSensorManager?.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_UI)
+        if (mCompassEnabled) {
+            mSensorManager!!.registerListener(mListener, mSensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_UI)
         }
     }
-    private fun mListener(): SensorEventListener{
-        var iOrientation:Int = -1
-        fun onAccuracyChanged(sensor:Sensor ,accuracy:Int) {
+
+    val mListener = object : SensorEventListener {
+        var iOrientation = -1
+        override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
 
         }
-        fun onSensorChanged(event: SensorEvent){
+
+        // 센서의 값을 받을 수 있도록 호출되는 메소드
+        override fun onSensorChanged(event: SensorEvent) {
             if (iOrientation < 0) {
-                val winmanager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-                iOrientation = winmanager.defaultDisplay.rotation
+                val winManage = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                iOrientation = winManage.defaultDisplay.rotation
             }
+
             mCompassView?.setAzimuth(event.values[0] + 90 * iOrientation)
             mCompassView?.invalidate()
         }
     }
+
+//
+//    fun updateTripList(tripName: String) {
+//        val fileName = "list.txt"
+//        val sdCard = Environment.getExternalStorageDirectory()
+//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+//        directory.mkdirs()
+//        val file = File(directory, fileName)
+//        try {
+//            val fOut = FileOutputStream(file, true)
+//            val osw = OutputStreamWriter(fOut)
+//            osw.append("$tripName.txt\n")
+//            osw.close()
+//            fOut.close()
+//        } catch (t: Throwable) {
+//        }
+//
+//    }
+//
+//    fun updateDataFile() {
+//        val fileName = "data.txt"
+//        val sdCard = Environment.getExternalStorageDirectory()
+//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+//        var str = ""
+//        directory.mkdirs()
+//        val tripNum: Int
+//
+//        val file = File(directory, fileName)
+//        try {
+//            val fIn = FileInputStream(file)
+//            val isr = InputStreamReader(fIn)
+//            val reader = BufferedReader(isr)
+//            str = reader.readLine()
+//            fIn.close()
+//            val fOut = FileOutputStream(file)
+//            val osw = OutputStreamWriter(fOut)
+//
+//            tripNum = Integer.parseInt(str)
+//            tripNum++
+//            str = (tripNum).toString()
+//            osw.write(str)
+//            osw.close()
+//            fOut.close()
+//            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+//
+//        } catch (e: java.io.FileNotFoundException) {
+//            str = createDataFile()
+//            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+//        } catch (t: Throwable) {
+//            t.printStackTrace()
+//        } finally {
+//            updateTripList(name)
+//        }
+//    }
+//
+//    fun createDataFile(): String {
+//        val fileName = "data.txt"
+//        val sdCard = Environment.getExternalStorageDirectory()
+//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+//        directory.mkdirs()
+//
+//        val file = File(directory, fileName)
+//        try {
+//            val fOut = FileOutputStream(file)
+//            val osw = OutputStreamWriter(fOut)
+//            osw.write("1")
+//            osw.close()
+//            fOut.close()
+//        } catch (t: Throwable) {
+//        }
+//
+//        return "1"
+//    }
+//
+//    companion object {
+//        private val TAG = "MapActivity"
+//
+//        //Bitmap bm;
+//        internal var comment = ""
+//        internal var fileName = ""
+//        internal var titleName = ""
+//        internal var latitudeMarker: Double = 0.toDouble()
+//        internal var longitudeMarker: Double = 0.toDouble()
+//    }
 }
