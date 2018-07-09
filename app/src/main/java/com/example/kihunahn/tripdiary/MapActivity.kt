@@ -42,7 +42,7 @@ import java.util.jar.Manifest
 class MapActivity : AppCompatActivity() {
     var mapFragment: SupportMapFragment? = null
     var map: GoogleMap? = null
-//
+
 
     var pathsList: ArrayList<LatLng> = ArrayList()
     private var mCompassView: CompassView? = null
