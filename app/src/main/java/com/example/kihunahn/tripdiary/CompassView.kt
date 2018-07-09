@@ -32,4 +32,11 @@ class CompassView(ctx: Context) : View(ctx) {
         mAzimuth = aAzimuth
     }
 
+
+  
+  
+  
+  
+  
+
 }
