@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/noteimage1">
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Write a title"
+        android:textColorHint="#555"
+        android:layout_above="@+id/userImage"
+        android:layout_alignLeft="@+id/userImage"
+        android:layout_alignStart="@+id/userImage"
+        android:layout_alignRight="@+id/userImage"
+        android:layout_alignEnd="@+id/userImage"
+        android:textColor="#f000"/>
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
+        android:layout_above="@+id/btnTakePicture"
+        android:background="@drawable/image_border"/>
+
+    <ImageButton
+        android:id="@+id/btnTakePicture"
+        android:layout_width="150dip"
+        android:layout_height="50dip"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
+        android:src="@drawable/takeapicture"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="316dp"
+        android:layout_height="120dp"
+        android:layout_alignEnd="@+id/userImage"
+        android:layout_alignStart="@+id/userImage"
+        android:layout_below="@+id/btnTakePicture"
+        android:gravity="top"
+        android:textColorHint="#f555"
+        android:hint="Write a memo."
+        android:textColor="#f000"/>
+
+    <ImageButton
+        android:id="@+id/btnSave"
+        android:layout_width="90dip"
+        android:layout_height="30dip"
+        android:layout_below="@+id/comment"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/write" />
+
+</RelativeLayout>
