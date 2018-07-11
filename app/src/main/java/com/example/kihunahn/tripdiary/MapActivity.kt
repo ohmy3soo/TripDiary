@@ -122,6 +122,7 @@ class MapActivity : AppCompatActivity() {
             requestMyLocation()
             FAM.close(true)
         }
+
         pauseBtn.setOnClickListener {
             running = false
             requestMyLocation()
