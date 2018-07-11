@@ -22,7 +22,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.location.Criteria
 import android.location.Location
-//import android.icu.text.SimpleDateFormat
 import android.os.Environment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -37,7 +36,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.io.*
 import java.util.*
 import java.text.SimpleDateFormat
-import java.util.jar.Manifest
 
 class MapActivity : AppCompatActivity() {
     var mapFragment: SupportMapFragment? = null
@@ -150,8 +148,9 @@ class MapActivity : AppCompatActivity() {
                 map?.isMyLocationEnabled = true
             }
 
-
-            requestMyLocation()
+ 
+                                                     
+        requestMyLocation()
         })
 
         try {
