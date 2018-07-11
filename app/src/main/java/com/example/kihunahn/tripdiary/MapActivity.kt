@@ -127,6 +127,7 @@ class MapActivity : AppCompatActivity() {
             requestMyLocation()
             FAM.close(true)
         }
+
         endBtn.setOnClickListener {
             running = false
             manager?.removeUpdates(myLocationListener)
