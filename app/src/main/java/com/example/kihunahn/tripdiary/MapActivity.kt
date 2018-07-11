@@ -151,8 +151,6 @@ class MapActivity : AppCompatActivity() {
             if (permission == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
             }
-
-
             //requestMyLocation()
         })
 
