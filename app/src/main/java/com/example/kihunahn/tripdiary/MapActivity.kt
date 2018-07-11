@@ -65,7 +65,6 @@ class MapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-
         val FAM = findViewById(R.id.material_design_android_floating_action_menu) as FloatingActionMenu
 
         val commentBtn = findViewById(R.id.material_design_floating_action_menu_item1) as com.github.clans.fab.FloatingActionButton
