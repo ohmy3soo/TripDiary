@@ -48,7 +48,6 @@ class MapActivity : AppCompatActivity() {
 
     private var running: Boolean = false
     var route = ""
-    var name: String? = null
     var polylineOptions: PolylineOptions? = null
 
     //Bitmap bm;
@@ -148,7 +147,10 @@ class MapActivity : AppCompatActivity() {
             if (permission == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
             }
-            requestMyLocation()
+
+ 
+                                                     
+        requestMyLocation()
         })
 
         try {
@@ -379,87 +381,90 @@ class MapActivity : AppCompatActivity() {
         }
     }
 
-//
-//    fun updateTripList(tripName: String) {
-//        val fileName = "list.txt"
-//        val sdCard = Environment.getExternalStorageDirectory()
-//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
-//        directory.mkdirs()
-//        val file = File(directory, fileName)
-//        try {
-//            val fOut = FileOutputStream(file, true)
-//            val osw = OutputStreamWriter(fOut)
-//            osw.append("$tripName.txt\n")
-//            osw.close()
-//            fOut.close()
-//        } catch (t: Throwable) {
-//        }
-//
-//    }
-//
-//    fun updateDataFile() {
-//        val fileName = "data.txt"
-//        val sdCard = Environment.getExternalStorageDirectory()
-//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
-//        var str = ""
-//        directory.mkdirs()
-//        val tripNum: Int
-//
-//        val file = File(directory, fileName)
-//        try {
-//            val fIn = FileInputStream(file)
-//            val isr = InputStreamReader(fIn)
-//            val reader = BufferedReader(isr)
-//            str = reader.readLine()
-//            fIn.close()
-//            val fOut = FileOutputStream(file)
-//            val osw = OutputStreamWriter(fOut)
-//
-//            tripNum = Integer.parseInt(str)
-//            tripNum++
-//            str = (tripNum).toString()
-//            osw.write(str)
-//            osw.close()
-//            fOut.close()
-//            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
-//
-//        } catch (e: java.io.FileNotFoundException) {
-//            str = createDataFile()
-//            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
-//        } catch (t: Throwable) {
-//            t.printStackTrace()
-//        } finally {
-//            updateTripList(name)
-//        }
-//    }
-//
-//    fun createDataFile(): String {
-//        val fileName = "data.txt"
-//        val sdCard = Environment.getExternalStorageDirectory()
-//        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
-//        directory.mkdirs()
-//
-//        val file = File(directory, fileName)
-//        try {
-//            val fOut = FileOutputStream(file)
-//            val osw = OutputStreamWriter(fOut)
-//            osw.write("1")
-//            osw.close()
-//            fOut.close()
-//        } catch (t: Throwable) {
-//        }
-//
-//        return "1"
-//    }
-//
-//    companion object {
-//        private val TAG = "MapActivity"
-//
-//        //Bitmap bm;
-//        internal var comment = ""
-//        internal var fileName = ""
-//        internal var titleName = ""
-//        internal var latitudeMarker: Double = 0.toDouble()
-//        internal var longitudeMarker: Double = 0.toDouble()
-//    }
+
+    fun updateTripList(tripName: String) {
+        val fileName = "list.txt"
+        val sdCard = Environment.getExternalStorageDirectory()
+        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+        directory.mkdirs()
+        val file = File(directory, fileName)
+        try {
+            val fOut = FileOutputStream(file, true)
+            val osw = OutputStreamWriter(fOut)
+            osw.append("$tripName.txt\n")
+            osw.close()
+            fOut.close()
+        } catch (t: Throwable) {
+        }
+
+    }
+
+    fun updateDataFile() {
+        val fileName = "data.txt"
+        val sdCard = Environment.getExternalStorageDirectory()
+        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+        var str = ""
+        directory.mkdirs()
+        var tripNum: Int
+
+        val file = File(directory, fileName)
+        try {
+            val fIn = FileInputStream(file)
+            val isr = InputStreamReader(fIn)
+            val reader = BufferedReader(isr)
+            str = reader.readLine()
+            fIn.close()
+            val fOut = FileOutputStream(file)
+            val osw = OutputStreamWriter(fOut)
+
+            tripNum = Integer.parseInt(str)
+            tripNum++
+            str = (tripNum).toString()
+            osw.write(str)
+            osw.close()
+            fOut.close()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+
+        } catch (e: java.io.FileNotFoundException) {
+            str = createDataFile()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        } finally {
+            updateTripList(name!!)
+        }
+    }
+
+    fun createDataFile(): String {
+        val fileName = "data.txt"
+        val sdCard = Environment.getExternalStorageDirectory()
+        val directory = File(sdCard.getAbsolutePath() + "/TripDiary")
+        directory.mkdirs()
+
+        val file = File(directory, fileName)
+        try {
+            val fOut = FileOutputStream(file)
+            val osw = OutputStreamWriter(fOut)
+            osw.write("1")
+            osw.close()
+            fOut.close()
+        } catch (t: Throwable) {
+        }
+
+        return "1"
+    }
+
+    companion object {
+        private val TAG = "MapActivity"
+
+        //Bitmap bm;
+        var comment = ""
+        var fileName = ""
+        var titleName = ""
+        var latitudeMarker: Double = 0.toDouble()
+        var longitudeMarker: Double = 0.toDouble()
+
+        var name: String? = null
+
+    }
 }
