@@ -119,12 +119,12 @@ class MapActivity : AppCompatActivity() {
             polylineOptions = PolylineOptions()
             polylineOptions?.color(Color.RED)
             polylineOptions?.width(15f)
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
         pauseBtn.setOnClickListener {
             running = false
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
         endBtn.setOnClickListener {
@@ -147,10 +147,7 @@ class MapActivity : AppCompatActivity() {
             if (permission == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
             }
-
- 
-                                                     
-        requestMyLocation()
+            //requestMyLocation()
         })
 
         try {
