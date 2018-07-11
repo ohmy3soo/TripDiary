@@ -22,7 +22,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.location.Criteria
 import android.location.Location
-//import android.icu.text.SimpleDateFormat
 import android.os.Environment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -37,12 +36,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.io.*
 import java.util.*
 import java.text.SimpleDateFormat
-import java.util.jar.Manifest
 
 class MapActivity : AppCompatActivity() {
     var mapFragment: SupportMapFragment? = null
     var map: GoogleMap? = null
-
 
     var pathsList: ArrayList<LatLng> = ArrayList()
     private var mCompassView: CompassView? = null
@@ -123,12 +120,12 @@ class MapActivity : AppCompatActivity() {
             polylineOptions = PolylineOptions()
             polylineOptions?.color(Color.RED)
             polylineOptions?.width(15f)
-            //requestMyLocation()
+            requestMyLocation()
             FAM.close(true)
         }
         pauseBtn.setOnClickListener {
             running = false
-            //requestMyLocation()
+            requestMyLocation()
             FAM.close(true)
         }
         endBtn.setOnClickListener {
@@ -151,7 +148,7 @@ class MapActivity : AppCompatActivity() {
             if (permission == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
             }
-            //requestMyLocation()
+            requestMyLocation()
         })
 
         try {
