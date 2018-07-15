@@ -22,7 +22,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.location.Criteria
 import android.location.Location
-//import android.icu.text.SimpleDateFormat
 import android.os.Environment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -37,7 +36,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.io.*
 import java.util.*
 import java.text.SimpleDateFormat
-import java.util.jar.Manifest
 
 class MapActivity : AppCompatActivity() {
     var mapFragment: SupportMapFragment? = null
@@ -67,7 +65,6 @@ class MapActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-
         val FAM = findViewById(R.id.material_design_android_floating_action_menu) as FloatingActionMenu
 
         val commentBtn = findViewById(R.id.material_design_floating_action_menu_item1) as com.github.clans.fab.FloatingActionButton
@@ -121,14 +118,17 @@ class MapActivity : AppCompatActivity() {
             polylineOptions = PolylineOptions()
             polylineOptions?.color(Color.RED)
             polylineOptions?.width(15f)
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
+
         pauseBtn.setOnClickListener {
             running = false
-            requestMyLocation()
+            //requestMyLocation()
             FAM.close(true)
         }
+
+
         endBtn.setOnClickListener {
             running = false
             manager?.removeUpdates(myLocationListener)
@@ -149,9 +149,7 @@ class MapActivity : AppCompatActivity() {
             if (permission == PackageManager.PERMISSION_GRANTED) {
                 map?.isMyLocationEnabled = true
             }
-
-
-            requestMyLocation()
+            //requestMyLocation()
         })
 
         try {
@@ -197,12 +195,10 @@ class MapActivity : AppCompatActivity() {
                                 + Environment.getExternalStorageDirectory() + "/TripDiary/TripPicture/" + titleName + ".jpeg"
                                 + "," + Environment.getExternalStorageDirectory() + "/TripDiary/TripComment/" + titleName + ".txt"
                                 + "," + java.lang.Double.toString(latitudeMarker) + "," + java.lang.Double.toString(longitudeMarker) + "\n")
-
                 myOutWriter.close()
             } catch (e: Exception) {
                 Toast.makeText(applicationContext, "fileName.txt is not.", Toast.LENGTH_LONG).show()
             }
-
             try {
                 val myReader = BufferedReader(
                         InputStreamReader(
