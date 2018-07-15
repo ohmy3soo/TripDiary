@@ -12,7 +12,6 @@ class CompassView(ctx: Context) : View(ctx) {
     private val PADDING = 2
 
     init {
-
         this.mCompass = ctx.resources.getDrawable(R.drawable.arrow_n)
     }
 
