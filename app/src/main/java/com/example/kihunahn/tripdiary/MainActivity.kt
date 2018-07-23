@@ -15,11 +15,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
-        /*
+
         main_archive.setOnClickListener {
             val intent = Intent(applicationContext, StorageActivity::class.java)
             startActivity(intent)
         }
+        /*
         main_help.setOnClickListener {
             val intent = Intent(applicationContext, MapActivity::class.java)
             startActivity(intent)
