@@ -3,6 +3,10 @@ package com.example.kihunahn.tripdiary
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.ListView
+import com.example.kihunahn.tripdiary.adapter.giladpater
+import com.example.kihunahn.tripdiary.inform.gilinform
 import kotlinx.android.synthetic.main.activity_storage.*
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -13,14 +17,24 @@ import java.net.URL
 
 
 class StorageActivity : AppCompatActivity() {
+    var listView: ListView? =  null
+    var adapter: giladpater? = null
+    var result = ArrayList<gilinform>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_storage)
         var url = "https://mplatform.seoul.go.kr/api/dule/courseBaseInfo.do"
+        listView = findViewById(R.id.listView)
+
         Getinformation().execute(url)
+        adapter = giladpater(this, result)
+
+        listView?.adapter = adapter
+        adapter?.notifyDataSetChanged()
     }
 
-    inner class Getinformation : AsyncTask<String, String, String>() {
+    inner class Getinformation : AsyncTask<String, String, String>(){
 
         override fun onPreExecute() {
             // Before doInBackground
@@ -33,8 +47,27 @@ class StorageActivity : AppCompatActivity() {
                 urlConnection = url.openConnection() as HttpURLConnection
 
                 var inString = streamToString(urlConnection.inputStream)
-                //textView.setText(inString)
-                publishProgress(inString)
+
+                var str=""
+                try {
+                    var json = JSONObject(inString)
+                    var tmp = json.getJSONArray("list")
+                    for (i in 0..tmp.length()) {
+                        val order = tmp.getJSONObject(i)
+                        var location = order.getString("LOCATION")
+                        var distance = order.getString("DISTANCE")
+                        var time = order.getString("WALK_TIME")
+                        var num = order.getString("COURSE_NO")
+                        var level = order.getString("COURSE_LEVEL")
+                        var name = order.getString("COURSE_NM")
+                        str = location + " " + distance + " " + time + " " + num + " " + level + " " + name + "\n"
+                        var user: gilinform = gilinform(str)
+                        result.add(user)
+                    }
+                } catch (ex: Exception) {
+
+                }
+                //publishProgress(inString)
             } catch (ex: Exception) {
 
             } finally {
@@ -45,24 +78,7 @@ class StorageActivity : AppCompatActivity() {
             return " "
         }
         override fun onProgressUpdate(vararg values: String?) {
-            var str=""
-            try {
-                var json = JSONObject(values[0])
-                var tmp = json.getJSONArray("list")
-                for (i in 0..tmp.length()) {
-                    val order = tmp.getJSONObject(i)
-                    var location = order.getString("LOCATION")
-                    var distance = order.getString("DISTANCE")
-                    var time = order.getString("WALK_TIME")
-                    var num = order.getString("COURSE_NO")
-                    var level = order.getString("COURSE_LEVEL")
-                    var name = order.getString("COURSE_NM")
-                    str += location + " " +distance + " "+ time +" " + num +" "+level+" "+name + "\n"
-                    textView.text = str
-                }
-            } catch (ex: Exception) {
 
-            }
         }
     }
     fun streamToString(inputStream: InputStream): String {
