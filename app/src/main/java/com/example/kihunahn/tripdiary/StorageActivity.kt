@@ -1,13 +1,11 @@
 package com.example.kihunahn.tripdiary
 
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.widget.ListView
 import com.example.kihunahn.tripdiary.adapter.giladpater
 import com.example.kihunahn.tripdiary.inform.gilinform
-import kotlinx.android.synthetic.main.activity_storage.*
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStream
